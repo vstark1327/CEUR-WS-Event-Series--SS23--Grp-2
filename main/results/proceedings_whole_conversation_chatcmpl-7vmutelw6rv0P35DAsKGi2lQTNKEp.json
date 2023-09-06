@@ -1,0 +1,2262 @@
+[
+      {
+            "role": "system",
+            "content": "You are a human"
+      },
+      {
+            "role": "user",
+            "content": "In wikidata, there are about 3400 entries which are interesting to me. Lets call these as \"events\". Additionally, there are different and fewer group of entries, lets call these as \"event series\". Almost all events are a part of event series. I will provide real examples later on, but for context, we can draw similarities to this example: if each star wars movies are \"events\", then the star wars itself is the \"event series\"."
+      },
+      {
+            "role": "user",
+            "content": "Moreover, there are entities called \"proceedings\". \"proceedings\" are collection of scientific papers which are presented in the earlier mentioned \"events\". It is known that every proceeding comes from an event, or multiple events can publish their proceedings jointly."
+      },
+      {
+            "role": "user",
+            "content": "In wikidata, the property connecting the events to event series are missing, and my task is to deduct from the title of the proceedings which event series does this event belong to. For humans it is an easy task for sure, but noone wants to edit thousands of entries by hand. This is where you step in."
+      },
+      {
+            "role": "user",
+            "content": "I want you to deduct which event series does the following proceedings belong to. To help you out, i will provide titles of some random events, and their corresponding event series to help you out with the pattern recognition. Then i will provide some sample of proceedings title for you to find out the event series for these."
+      },
+      {
+            "role": "user",
+            "content": "Event 1 is named 'Third Conference on Digital Curation Technologies (Qurator 2022)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 1 is 'Conference on Digital Curation Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 2 is named '37th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 2 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 3 is named 'Sixteenth International Conference on Concept Lattices and Their Applications (CLA 2022)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 3 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 4 is named '1st International Workshop on Knowledge Graph Generation From Text'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 4 is 'Workshop on Knowledge Graph Generation From Text'"
+      },
+      {
+            "role": "user",
+            "content": "Event 5 is named '3rd International Workshop on Knowledge Graph Construction (KGCW 2022)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 5 is 'International Workshop On Knowledge Graph Construction'"
+      },
+      {
+            "role": "user",
+            "content": "Event 6 is named '8th Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 6 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 7 is named 'Joint Ontology Workshops 2021'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 7 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 8 is named '36th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 8 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 9 is named '7th Linguistic and Cognitive Approaches To Dialog Agents Workshop - LaCATODA 2021'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 9 is 'Workshop on Linguistic and Cognitive Approaches To Dialog Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 10 is named '2nd International Workshop on Knowledge Graph Construction'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 10 is 'International Workshop On Knowledge Graph Construction'"
+      },
+      {
+            "role": "user",
+            "content": "Event 11 is named '11th International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 11 is 'International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "user",
+            "content": "Event 12 is named 'Seventh Italian Conference on Computational Linguistics'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 12 is 'Italian Conference on Computational Linguistics'"
+      },
+      {
+            "role": "user",
+            "content": "Event 13 is named 'Conference on Digital Curation Technologies (Qurator 2021)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 13 is 'Conference on Digital Curation Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 14 is named '4th Workshop on Natural Language for Artificial Intelligence'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 14 is 'International Conference of the Italian Association for Artificial Intelligence'"
+      },
+      {
+            "role": "user",
+            "content": "Event 15 is named '2nd International Workshop on Information-Communication Technologies & Embedded Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 15 is 'International Workshop on Information-Communication Technologies & Embedded Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 16 is named 'The 19th International Semantic Web Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 16 is 'International Semantic Web Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 17 is named '6th Workshop on Managing the Evolution and Preservation of the Data Web (MEPDaW)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 17 is 'Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 18 is named 'XII Latin American Women in Computing Congress 2020 (LAWCC 2020) co-located with XLVI Latin American Computer Conference ()'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 18 is 'Latin American Computing Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 19 is named '35th Italian Conference on Computational Logic - CILC 2020'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 19 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 20 is named '7th Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 20 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 21 is named '9th International Conference on Information and Communication Technologies in Agriculture, Food and Environment'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 21 is 'International Conference on Information and Communication Technologies for Sustainable Agri-production and Environment'"
+      },
+      {
+            "role": "user",
+            "content": "Event 22 is named '3rd Scientific-practical Workshop Information Technologies: Algorithms, Models, Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 22 is 'Scientific-practical Workshop Information Technologies: Algorithms, Models, Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 23 is named 'Joint Ontology Workshops co-located with the'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 23 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 24 is named '2nd International Workshop on Information, Computation, and Control Systems for Distributed Environments'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 24 is 'International Workshop on Information, Computation, and Control Systems for Distributed Environments'"
+      },
+      {
+            "role": "user",
+            "content": "Event 25 is named 'Fifthteenth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 25 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 26 is named '2nd International Workshop on Control, Optimisation and Analytical Processing of Social Networks'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 26 is 'International Workshop on Control, Optimisation and Analytical Processing of Social Networks'"
+      },
+      {
+            "role": "user",
+            "content": "Event 27 is named '10th International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 27 is 'International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "user",
+            "content": "Event 28 is named '5th Congress on Robotics and Neuroscience'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 28 is 'Congress on Robotics and Neuroscience'"
+      },
+      {
+            "role": "user",
+            "content": "Event 29 is named 'Fourth Italian Conference on Cyber Security'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 29 is 'Italian Conference on Cybersecurity'"
+      },
+      {
+            "role": "user",
+            "content": "Event 30 is named 'Conference on Digital Curation Technologies (Qurator 2020)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 30 is 'Conference on Digital Curation Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 31 is named '1st International Workshop on Information-Communication Technologies & Embedded Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 31 is 'International Workshop on Information-Communication Technologies & Embedded Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 32 is named '3rd Workshop on Affective Computing and Context Awareness in Ambient Intelligence (), Universidad Polit\u00e9cnica de'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 32 is 'Workshop on Affective Computing and Context Awareness in Ambient Intelligence'"
+      },
+      {
+            "role": "user",
+            "content": "Event 33 is named '12th International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 33 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 34 is named 'ASSIN 2 Shared Task: Evaluating Semantic Textual Similarity and Textual Entailment in Portuguese'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 34 is 'Brazilian Symposium in Information and Human Language Technology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 35 is named 'Joint Ontology Workshops 2019 Episode V: The Styrian Autumn of Ontology'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 35 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 36 is named 'Eighth Workshop on Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 36 is 'Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 37 is named '6th Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 37 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 38 is named '21st Configuration Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 38 is 'International Configuration Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 39 is named '10th Italian Information Retrieval Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 39 is 'Italian Information Retrieval Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 40 is named '5th International Workshop on Computational History'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 40 is 'Workshop on Computational History'"
+      },
+      {
+            "role": "user",
+            "content": "Event 41 is named '7th International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 41 is 'International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 42 is named 'Semantic Systems. The Power of AI and Knowledge Graphs - 15th International Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 42 is 'International Conference on Semantic Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 43 is named '20th Italian Conference on Theoretical Computer Science'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 43 is 'Italian Conference on Theoretical Computer Science'"
+      },
+      {
+            "role": "user",
+            "content": "Event 44 is named '5th Workshop on Linguistic and Cognitive Approaches to Dialog Agents'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 44 is 'Workshop on Linguistic and Cognitive Approaches To Dialog Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 45 is named '5th Workshops on Bridging the Gap Between Human and Automated Reasoning (BtG 2019)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 45 is 'Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 46 is named '4th Joint Workshop on Bibliometric-enhanced Information Retrieval and Natural Language Processing for Digital Libraries'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 46 is 'Joint Workshop on Bibliometric-enhanced Information Retrieval and Natural Language Processing for Digital Libraries'"
+      },
+      {
+            "role": "user",
+            "content": "Event 47 is named '9th PhD Symposium on Future Directions in Information Access co-located with 12th European Summer School in Information Retrieval'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 47 is 'BCS-IRSG Symposium on Future Directions in Information Access'"
+      },
+      {
+            "role": "user",
+            "content": "Event 48 is named '1st International Workshop on Information, Computation, and Control Systems for Distributed Environments'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 48 is 'International Workshop on Information, Computation, and Control Systems for Distributed Environments'"
+      },
+      {
+            "role": "user",
+            "content": "Event 49 is named 'Seminar Series on Advanced Techniques & Tools for Software Evolution (SATTOSE 2019)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 49 is 'Seminar on Advanced Techniques and Tools for Software Evolution'"
+      },
+      {
+            "role": "user",
+            "content": "Event 50 is named '20th Workshop \"From Objects to Agents\"'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 50 is 'Workshop From Objects to Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 51 is named '34th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 51 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 52 is named '4th Swiss Text Analytics Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 52 is 'Swiss Text Analytics Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 53 is named '6th International Conference on ICT for Sustainability'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 53 is 'ICT for Sustainability'"
+      },
+      {
+            "role": "user",
+            "content": "Event 54 is named '8th International Workshop on Bidirectional Transformations co-located with the Philadelphia Logic Week'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 54 is 'International Workshop on Bidirectional Transformations'"
+      },
+      {
+            "role": "user",
+            "content": "Event 55 is named '1st International Workshop on Control, Optimisation and Analytical Processing of Social Networks'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 55 is 'International Workshop on Control, Optimisation and Analytical Processing of Social Networks'"
+      },
+      {
+            "role": "user",
+            "content": "Event 56 is named '3rd International Conference on Computational Linguistics and Intelligent Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 56 is 'International Conference on Computational Linguistics and Intelligent Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 57 is named 'Second International Workshop on Computer Modeling and Intelligent Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 57 is 'International Workshop on Computer Modeling and Intelligent Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 58 is named '8th International Workshop on Bibliometric-enhanced Information Retrieval (BIR 2019) co-located with the 41st European Conference on Information Retrieval (ECIR 2019)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 58 is 'International Workshop on Bibliometric-enhanced Information Retrieval'"
+      },
+      {
+            "role": "user",
+            "content": "Event 59 is named '3rd International GamiFIN Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 59 is 'GamiFIN Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 60 is named '5th Collaborative European Research Conference (CERC 2019)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 60 is 'Collaborative European Research Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 61 is named 'Digital Humanities in the Nordic Countries 4th Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 61 is 'Digital Humanities in the Nordic and Baltic Countries Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 62 is named '3rd International Conference on Advanced Aspects of Software Engineering'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 62 is 'International Conference on Advanced Aspects of Software Engineering'"
+      },
+      {
+            "role": "user",
+            "content": "Event 63 is named '4th Congress on Robotics and Neuroscience'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 63 is 'Congress on Robotics and Neuroscience'"
+      },
+      {
+            "role": "user",
+            "content": "Event 64 is named '5th Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 64 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 65 is named '20th Configuration Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 65 is 'International Configuration Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 66 is named '33rd Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 66 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 67 is named '19th Italian Conference on Theoretical Computer Science'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 67 is 'Italian Conference on Theoretical Computer Science'"
+      },
+      {
+            "role": "user",
+            "content": "Event 68 is named 'The Joint Ontology Workshops 2018'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 68 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 69 is named 'Fourth Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 69 is 'Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 70 is named 'The Fourth Linguistic and Cognitive Approaches To Dialog Agents Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 70 is 'Workshop on Linguistic and Cognitive Approaches To Dialog Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 71 is named 'Workshop on Experimental Evaluation of Algorithms for Solving Problems with Combinatorial Explosion co-located with the Federated Logic Conference, RCRA@FLOC 2018'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 71 is 'Workshop on Knowledge Representation and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 72 is named '6th International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 72 is 'International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 73 is named '2nd International Conference on Computational Linguistics and Intelligent Systems, COLINS 2018, Main Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 73 is 'International Conference on Computational Linguistics and Intelligent Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 74 is named '11th International Conference on Random and Exhaustive Generation of Combinatorial Structures'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 74 is 'International Conference on Random and Exhaustive Generation of Combinatorial Structures'"
+      },
+      {
+            "role": "user",
+            "content": "Event 75 is named '10th International Workshop on Science Gateways'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 75 is 'International Workshop on Science Gateways'"
+      },
+      {
+            "role": "user",
+            "content": "Event 76 is named '11th International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 76 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 77 is named 'Fourteenth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 77 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 78 is named '3rd Swiss Text Analytics Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 78 is 'Swiss Text Analytics Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 79 is named '4th Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 79 is 'Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 80 is named '9th International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 80 is 'International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "user",
+            "content": "Event 81 is named '14th International Conference on ICT in Education, Research and Industrial Applications. Integration, Harmonization and Knowledge Transfer. Main Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 81 is 'International Conference on Information and Communication Technologies in Education, Research, and Industrial Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 82 is named 'The 11th Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 82 is 'Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 83 is named 'Workshop on Affective Computing and Context Awareness in Ambient Intelligence ()'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 83 is 'Workshop on Affective Computing and Context Awareness in Ambient Intelligence'"
+      },
+      {
+            "role": "user",
+            "content": "Event 84 is named '20th International Workshop on Design, Optimization, Languages and Analytical Processing of Big Data'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 84 is 'International Workshop on Data Warehousing and OLAP'"
+      },
+      {
+            "role": "user",
+            "content": "Event 85 is named '3rd International Workshop on Semantic Web 2018 co-located with 15th International Congress on Information (INFO 2018)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 85 is 'International Workshop on Semantic Web Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 86 is named 'Second Italian Conference on Cyber Security'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 86 is 'Italian Conference on Cybersecurity'"
+      },
+      {
+            "role": "user",
+            "content": "Event 87 is named '8th International Workshop on Evaluating Information Access co-located with the 13th NTCIR Conference on the Evaluation of Information Access Technologies (NTCIR 2017)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 87 is 'NTCIR Conference on Evaluation of Information Access Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 88 is named '16th edition of the BElgian-NEtherlands software eVOLution symposium'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 88 is 'BElgian-NEtherlands software eVOLution symposium'"
+      },
+      {
+            "role": "user",
+            "content": "Event 89 is named '9th International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 89 is 'International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 90 is named '10th Forum Media Technology and 3rd All Around Audio Symposium'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 90 is 'Forum Media Technology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 91 is named '3rd INCOSE Italia Conference on Systems Engineering'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 91 is 'INCOSE Italia Conference on Systems Engineering'"
+      },
+      {
+            "role": "user",
+            "content": "Event 92 is named '5th International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 92 is 'International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 93 is named 'Joint Ontology Workshops 2017'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 93 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 94 is named '4th Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 94 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 95 is named 'Linguistic and Cognitive Approaches To Dialog Agents Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 95 is 'Workshop on Linguistic and Cognitive Approaches To Dialog Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 96 is named '2nd Joint Workshop on Bibliometric-enhanced Information Retrieval and Natural Language Processing for Digital Libraries'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 96 is 'Joint Workshop on Bibliometric-enhanced Information Retrieval and Natural Language Processing for Digital Libraries'"
+      },
+      {
+            "role": "user",
+            "content": "Event 97 is named '3rd Workshop on Bridging the Gap between Human and Automated Reasoning - Is Logic and Automated Reasoning a Foundation for Human Reasoning?'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 97 is 'Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 98 is named 'Twelfth International Workshop on Neural-Symbolic Learning and Reasoning'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 98 is 'International Workshop on Neural-Symbolic Learning and Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 99 is named '9th International Workshop on Science Gateways'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 99 is 'International Workshop on Science Gateways'"
+      },
+      {
+            "role": "user",
+            "content": "Event 100 is named '8th International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 100 is 'International Workshop on Enterprise Modeling and Information Systems Architectures'"
+      },
+      {
+            "role": "user",
+            "content": "Event 101 is named '10th International i* Workshop co-located with the 29th International Conference on Advanced Information Systems Engineering'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 101 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 102 is named '8th Italian Information Retrieval Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 102 is 'Italian Information Retrieval Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 103 is named '3rd Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 103 is 'Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 104 is named '4th Workshop on Linked Data Quality'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 104 is 'Workshop on Linked Data Quality'"
+      },
+      {
+            "role": "user",
+            "content": "Event 105 is named 'The 10th Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 105 is 'Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 106 is named '19th International Workshop on Design, Optimization, Languages and Analytical Processing of Big Data'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 106 is 'International Workshop on Data Warehousing and OLAP'"
+      },
+      {
+            "role": "user",
+            "content": "Event 107 is named '9th Central European Workshop on Services and their Composition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 107 is 'Central-European Workshop on Services and their Composition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 108 is named 'International Workshop on Software Ecosystems co-located with 10th International Conference on Information Systemss'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 108 is 'International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 109 is named '2nd International Conference on Recent Trends and Applications in Computer Science and Information Technology'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 109 is 'International Conference on Recent Trends and Applications in Computer Science and Information Technology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 110 is named '2nd INCOSE Italia Conference on Systems Engineering'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 110 is 'INCOSE Italia Conference on Systems Engineering'"
+      },
+      {
+            "role": "user",
+            "content": "Event 111 is named '2nd International Workshop on Semantic Web 2016 co-located with 14th International Congress on Information (INFO 2016)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 111 is 'International Workshop on Semantic Web Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 112 is named '10th Workshop on Verification and Evaluation of Computer and Communication System'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 112 is 'International Workshop on Verification and Evaluation of Computer and Communication Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 113 is named '7th Workshop on Ontologies and Data in Life Sciences, ODLS 2016, organized by the GI Workgroup Ontologies in Biomedicine and Life Sciences (OBML)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 113 is 'Workshop on Ontologies and Data in Life Sciences'"
+      },
+      {
+            "role": "user",
+            "content": "Event 114 is named '3rd Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 114 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 115 is named 'Ninth International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 115 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 116 is named '2nd International Workshop on Knowledge Discovery on the WEB'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 116 is 'International Workshop on Knowledge Discovery on the Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 117 is named 'Workshop on Computational Creativity, Concept Invention, and General Intelligence (C3GI 2016) co-located with the 28th European Summer School in Logic, Language and Information'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 117 is 'Workshop on Computational Creativity, Concept Invention, and General Intelligence'"
+      },
+      {
+            "role": "user",
+            "content": "Event 118 is named 'Tenth Latin American Workshop on Logic/Languages, Algorithms and New Methods of Reasoning'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 118 is 'Latin-American Workshop on Non-Monotonic Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 119 is named '17th Workshop \"From Objects to Agents\" co-located with 18th European Agent Systems Summer School'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 119 is 'Workshop From Objects to Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 120 is named 'The Work in Progress Section of the DML track of CICM 2016'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 120 is 'Intelligent Computer Mathematics - 9th International Conference, CICM 2016, Bialystok, Poland, July 25-29, 2016'"
+      },
+      {
+            "role": "user",
+            "content": "Event 121 is named 'Thirteenth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 121 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 122 is named 'Post-9th Seminar on Advanced Techniques and Tools for Software Evolution'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 122 is 'Seminar on Advanced Techniques and Tools for Software Evolution'"
+      },
+      {
+            "role": "user",
+            "content": "Event 123 is named '2nd Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 123 is 'Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 124 is named 'Joint Ontology Workshops 2016'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 124 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 125 is named '3rd Congreso de la Sociedad Espa\u00f1ola para las Ciencias del Videojuego'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 125 is 'Conference of the Spanish Association for Videogames Sciences'"
+      },
+      {
+            "role": "user",
+            "content": "Event 126 is named 'Joint Workshop on Bibliometric-enhanced Information Retrieval and Natural Language Processing for Digital Libraries'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 126 is 'Joint Workshop on Bibliometric-enhanced Information Retrieval and Natural Language Processing for Digital Libraries'"
+      },
+      {
+            "role": "user",
+            "content": "Event 127 is named '31st Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 127 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 128 is named '8th International Workshop on Science Gateways'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 128 is 'International Workshop on Science Gateways'"
+      },
+      {
+            "role": "user",
+            "content": "Event 129 is named '2nd Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 129 is 'Workshop on Managing the Evolution and Preservation of the Data Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 130 is named '3rd Workshop on Linked Data Quality'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 130 is 'Workshop on Linked Data Quality'"
+      },
+      {
+            "role": "user",
+            "content": "Event 131 is named 'Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 131 is 'Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 132 is named '6th Workshop on 'Making Sense of Microposts''"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 132 is 'Workshop on Making Sense of Microposts'"
+      },
+      {
+            "role": "user",
+            "content": "Event 133 is named '5th International Workshop on Bidirectional Transformations'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 133 is 'International Workshop on Bidirectional Transformations'"
+      },
+      {
+            "role": "user",
+            "content": "Event 134 is named '1st Chinese Conference on Logic and Argumentation'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 134 is 'Chinese Conference on Logic and Argumentation'"
+      },
+      {
+            "role": "user",
+            "content": "Event 135 is named 'Third Workshop on Bibliometric-enhanced Information Retrieval'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 135 is 'International Workshop on Bibliometric-enhanced Information Retrieval'"
+      },
+      {
+            "role": "user",
+            "content": "Event 136 is named 'Joint REFSQ-2016 Workshops, Doctoral Symposium, Research Method Track, and Poster Track co-located with the 22nd International Conference on Requirements Engineering: Foundation for Software Quality (REFSQ 2016)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 136 is 'International Workshop on Requirements Engineering and Testing'"
+      },
+      {
+            "role": "user",
+            "content": "Event 137 is named 'Third Interdisciplinary Workshop SHAPES 3.0 - The Shape of Things 2015'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 137 is 'Interdisciplinary Workshop The Shape of Things'"
+      },
+      {
+            "role": "user",
+            "content": "Event 138 is named 'Twelfth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 138 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 139 is named 'embedded operating system workshop - Embed With Linux 2015'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 139 is 'Embed With Linux Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 140 is named '3rd International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 140 is 'International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 141 is named '2nd Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 141 is 'Joint Workshop on Interfaces and Human Decision Making for Recommender Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 142 is named '17th International Configuration Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 142 is 'International Configuration Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 143 is named '2nd Annual International Symposium on Information Management and Big Data -'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 143 is 'Symposium on Information Management and Big Data'"
+      },
+      {
+            "role": "user",
+            "content": "Event 144 is named 'Eighth International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 144 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 145 is named '1st Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 145 is 'Workshop on Bridging the Gap between Human and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 146 is named 'Joint Ontology Workshops 2015'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 146 is 'The Joint Ontology Workshops'"
+      },
+      {
+            "role": "user",
+            "content": "Event 147 is named '30th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 147 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 148 is named '4th Workshop on Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 148 is 'Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 149 is named 'The 8th Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 149 is 'Workshop on Linked Data on the Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 150 is named 'Geospatial Science Research 3 Symposium'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 150 is 'Geospatial Science Research Symposium'"
+      },
+      {
+            "role": "user",
+            "content": "Event 151 is named 'INCOSE Italia Conference on Systems Engineering'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 151 is 'INCOSE Italia Conference on Systems Engineering'"
+      },
+      {
+            "role": "user",
+            "content": "Event 152 is named 'Ninth Conference on Semantic Technology for Intelligence, Defense, and Security'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 152 is 'Semantic Technologies for Intelligence, Defense, and Security'"
+      },
+      {
+            "role": "user",
+            "content": "Event 153 is named 'Embed With Linux 2014 Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 153 is 'Embed With Linux Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 154 is named '5th International Conference on Biomedical Ontology'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 154 is 'International Conference on Biomedical Ontology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 155 is named '1st Symposium on Information Management and Big Data -'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 155 is 'Symposium on Information Management and Big Data'"
+      },
+      {
+            "role": "user",
+            "content": "Event 156 is named 'Eleventh International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 156 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 157 is named '8th International Workshop on Verification and Evaluation of Computer and Communication Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 157 is 'International Workshop on Verification and Evaluation of Computer and Communication Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 158 is named 'XV Workshop \"Dagli Oggetti agli Agenti\"'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 158 is 'Workshop From Objects to Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 159 is named '3rd Workshop on Software Quality Analysis, Monitoring, Improvement and Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 159 is 'Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 160 is named '2\u00e8me Journ\u00e9e AIM de recherche Serious Games et innovation'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 160 is 'Conference of the Association Information and Management'"
+      },
+      {
+            "role": "user",
+            "content": "Event 161 is named 'Tweet Language Identification Workshop co-located with 30th Conference of the Spanish Society for Natural Language Processing, TweetLID@'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 161 is 'Annual Conference of the Spanish Society for Natural Language Processing'"
+      },
+      {
+            "role": "user",
+            "content": "Event 162 is named '1st Congreso de la Sociedad Espa\u00f1ola para las Ciencias del Videojuego'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 162 is 'Conference of the Spanish Association for Videogames Sciences'"
+      },
+      {
+            "role": "user",
+            "content": "Event 163 is named 'Seventh International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 163 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 164 is named '29th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 164 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 165 is named 'First International Workshop on Artificial Intelligence and Cognition (AIC 2013) An official workshop of the 13th International Conference of the Italian Association for Artificial Intelligence (AI*IA 2013)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 165 is 'International Workshop on Artificial Intelligence and Cognition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 166 is named 'Symposium on Software Performance: Joint Kieker/Palladio Days 2013'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 166 is 'Symposium on Small Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 167 is named 'Tenth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 167 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 168 is named '28th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 168 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 169 is named '6th Seminar on Ontology Research in Brazil'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 169 is 'Joint Seminar on Ontology Research in Brazil / International Workshop on Metamodels, Ontologies and Semantic Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 170 is named 'LinkedUp Veni Competition on Linked and Open Data for Education held at the Open Knowledge Conference 2013'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 170 is 'Open Knowledge Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 171 is named '2nd Workshop on Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 171 is 'Software Quality Analysis, Monitoring, Improvement, and Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 172 is named 'Conference on Information Technologies - Applications and Theory'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 172 is 'Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 173 is named '3rd International Symposium on Data-driven Process Discovery and Analysis'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 173 is 'International Symposium on Data-Driven Process Discovery and Analysis'"
+      },
+      {
+            "role": "user",
+            "content": "Event 174 is named '5. Workshop \"Business Intelligence\" der GI-Fachgruppe Business Intelligence in Zusammenarbeit mit dem Institut f\u00fcr Wirtschaftsinformatik der Technischen Universit\u00e4t Bergakademie'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 174 is 'Workshop Business Intelligence'"
+      },
+      {
+            "role": "user",
+            "content": "Event 175 is named '4th International Conference on Biomedical Ontology 2013'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 175 is 'International Conference on Biomedical Ontology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 176 is named '9th International Conference on ICT in Education, Research and Industrial Applications: Integration, Harmonization and Knowledge Transfer'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 176 is 'International Conference on Information and Communication Technologies in Education, Research, and Industrial Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 177 is named '6th International i* Workshop 2013'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 177 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 178 is named '5th International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 178 is 'International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 179 is named 'Ninth Spring Researchers Colloquium on Databases and Information Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 179 is 'Spring Young Researchers Colloquium on Databases and Information Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 180 is named 'Dateso 2013 Annual International Workshop on DAtabases, TExts, Specifications and Objects'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 180 is 'Databases, Texts, Specifications, Objects'"
+      },
+      {
+            "role": "user",
+            "content": "Event 181 is named '5th Central-European Workshop on Services and their Composition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 181 is 'Central-European Workshop on Services and their Composition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 182 is named 'Geospatial Science Research 2 Symposium'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 182 is 'Geospatial Science Research Symposium'"
+      },
+      {
+            "role": "user",
+            "content": "Event 183 is named 'Workshop on Context-Aware Adaptation of Service Front-Ends'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 183 is 'Workshop on Context-Aware Adaptation of Service Front-Ends'"
+      },
+      {
+            "role": "user",
+            "content": "Event 184 is named 'Ninth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 184 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 185 is named '21th International Workshop on Concurrency, Specification and Programming'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 185 is 'International Workshop on Concurrency, Specification and Programming'"
+      },
+      {
+            "role": "user",
+            "content": "Event 186 is named 'Joint V Seminar on Ontology Research in Brazil and VII International Workshop on Metamodels, Ontologies and Semantic Technologies'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 186 is 'Joint Seminar on Ontology Research in Brazil / International Workshop on Metamodels, Ontologies and Semantic Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 187 is named '13th Workshop on Objects and Agents'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 187 is 'Workshop From Objects to Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 188 is named '12th Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 188 is 'Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 189 is named '2nd International Workshop on Information Management for Mobile Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 189 is 'International Workshop on Information Management for Mobile Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 190 is named 'Second International Workshop on Searching and Integrating New Web Data Sources'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 190 is 'International Workshop on Very Large Data Search'"
+      },
+      {
+            "role": "user",
+            "content": "Event 191 is named 'Forth International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 191 is 'International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 192 is named 'Popularize Artificial Intelligence, AI*IA Workshop and Prize for Celebrating 100th Anniversary of Alan Turing's Birth'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 192 is 'International Conference of the Italian Association for Artificial Intelligence'"
+      },
+      {
+            "role": "user",
+            "content": "Event 193 is named '9th Italian Convention on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 193 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 194 is named '4th Central-European Workshop on Services and their Composition'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 194 is 'Central-European Workshop on Services and their Composition'"
+      },
+      {
+            "role": "user",
+            "content": "Event 195 is named 'Sixth International Conference on Semantic Technologies for Intelligence, Defense, and Security'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 195 is 'Semantic Technologies for Intelligence, Defense, and Security'"
+      },
+      {
+            "role": "user",
+            "content": "Event 196 is named '6th SIKS Conference on Enterprise Information Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 196 is 'Conference on Enterprise Information Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 197 is named 'Eighth International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 197 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 198 is named '11th Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 198 is 'Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 199 is named '5th International Conference on Information and Communication Technologies for Sustainable Agri-production and Environment'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 199 is 'International Conference on Information and Communication Technologies for Sustainable Agri-production and Environment'"
+      },
+      {
+            "role": "user",
+            "content": "Event 200 is named 'First International Workshop on Searching and Integrating New Web Data Sources - Very Large Data Search'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 200 is 'International Workshop on Very Large Data Search'"
+      },
+      {
+            "role": "user",
+            "content": "Event 201 is named '26th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 201 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 202 is named '5th International i* Workshop 2011'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 202 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 203 is named '3rd Canadian Semantic Web Symposium (CSWS2011)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 203 is 'Canadian Semantic Web Symposium'"
+      },
+      {
+            "role": "user",
+            "content": "Event 204 is named '1st CUBIST (Combining and Uniting Business Intelligence with Semantic Technologies) Workshop 2011'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 204 is 'Combining and Uniting Business Intelligence with Semantic Technologies Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 205 is named '2nd International Conference on Biomedical Ontology'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 205 is 'International Conference on Biomedical Ontology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 206 is named '1st European Workshop on Human-Computer Interaction and Information Retrieval'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 206 is 'European Workshop on Human-Computer Interaction and Information Retrieval'"
+      },
+      {
+            "role": "user",
+            "content": "Event 207 is named '6th Open Knowledge Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 207 is 'Open Knowledge Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 208 is named '3rd International Workshop on Science Gateways for Life Sciences'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 208 is 'International Workshop on Science Gateways'"
+      },
+      {
+            "role": "user",
+            "content": "Event 209 is named 'Third International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 209 is 'International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 210 is named '2nd Italian Information Retrieval (IIR) Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 210 is 'Italian Information Retrieval Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 211 is named '6th International Workshop on Online Dispute Resolution 2010'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 211 is 'International Workshop on Online Dispute Resolution'"
+      },
+      {
+            "role": "user",
+            "content": "Event 212 is named '5th SIKS/BENAIS Conference on Enterprise Information Systems'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 212 is 'Conference on Enterprise Information Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 213 is named '7th International Conference on Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 213 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 214 is named 'Fourth International Symposium for Semantic Mining in Biomedicine'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 214 is 'International Symposium for Semantic Mining in Biomedicine'"
+      },
+      {
+            "role": "user",
+            "content": "Event 215 is named 'Third Interop-Vlab.It Workshop on Enterprise Interoperability'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 215 is 'Interop-Vlab.It Workshop on Pervasive Computing for Networked Enterprises'"
+      },
+      {
+            "role": "user",
+            "content": "Event 216 is named 'Conference on Theory and Practice of Information Technologies, , Hotel Smrekovica'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 216 is 'Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 217 is named 'Workshop, Dagli Oggetti Agli Agenti'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 217 is 'Workshop From Objects to Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 218 is named '25th Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 218 is 'Italian Conference on Computational Logic'"
+      },
+      {
+            "role": "user",
+            "content": "Event 219 is named '17th RCRA workshop on Experimental Evaluation of Algorithms for Solving Problems with Combinatorial Explosion'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 219 is 'Workshop on Knowledge Representation and Automated Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 220 is named '4th International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 220 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 221 is named '5th Open Knowledge Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 221 is 'Open Knowledge Conference'"
+      },
+      {
+            "role": "user",
+            "content": "Event 222 is named 'First International Workshop on Software Ecosystems ( IWSECO-2009 ), co-located with the 11th International Conference on Software Reuse'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 222 is 'International Workshop on Software Ecosystems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 223 is named 'Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 223 is 'Conference on Theory and Practice of Information Technologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 224 is named '2nd International Conference on ICT Solutions for Justice'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 224 is 'International Conference on ICT Solutions for Justice'"
+      },
+      {
+            "role": "user",
+            "content": "Event 225 is named 'International Workshop on Portals for Life Sciences'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 225 is 'International Workshop on Science Gateways'"
+      },
+      {
+            "role": "user",
+            "content": "Event 226 is named '1st International Conference on ICT Solutions for Justice'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 226 is 'International Conference on ICT Solutions for Justice'"
+      },
+      {
+            "role": "user",
+            "content": "Event 227 is named 'CLA2008 Concept Lattices and Their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 227 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 228 is named 'iStar'08 3rd International i* Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 228 is 'International i* Workshop'"
+      },
+      {
+            "role": "user",
+            "content": "Event 229 is named '5th International Workshop on Evaluation of Ontologies and Ontology-based Tools, EON2007, Co-located with the ISWC2007'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 229 is 'Workshop on Evaluation of Ontology-based Tools'"
+      },
+      {
+            "role": "user",
+            "content": "Event 230 is named '2nd International Workshop on Modular Ontologies'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 230 is 'International Workshop on Modular Ontologies'"
+      },
+      {
+            "role": "user",
+            "content": "Event 231 is named 'CLA '07 Concept Lattices and their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 231 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 232 is named 'Latin-American Workshop on Non-Monotonic Reasoning, LA-NMR07 Workshop, Benem\u00e9rita Universidad Aut\u00f3noma de'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 232 is 'Latin-American Workshop on Non-Monotonic Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 233 is named 'Workshop on Advanced Learning Technologies for Disabled and Non-Disabled People'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 233 is 'Workshop on Advanced Learning Technologies for Disabled and Non-Disabled People'"
+      },
+      {
+            "role": "user",
+            "content": "Event 234 is named 'Semantic Web Applications and Perspectives, 3rd Italian Semantic Web Workshop, Scuola Normale Superiore'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 234 is 'Semantic Web Applications and Perspectives'"
+      },
+      {
+            "role": "user",
+            "content": "Event 235 is named '4th European Workshop on Multi-Agent Systems EUMAS'06'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 235 is 'European Conference on Multi-Agent Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 236 is named 'Workshop, From Objects to Agents'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 236 is 'Workshop From Objects to Agents'"
+      },
+      {
+            "role": "user",
+            "content": "Event 237 is named 'Answer Set Programming, Advances in Theory and Implementation, 3rd Intl. ASP'05 Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 237 is 'Answer Set Programming'"
+      },
+      {
+            "role": "user",
+            "content": "Event 238 is named 'CLA 2005 Concept Lattices and their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 238 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 239 is named '5th International Conference on the Quality of Information and Communications Technology'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 239 is 'Quality of Information and Communications Technology'"
+      },
+      {
+            "role": "user",
+            "content": "Event 240 is named 'CLA 2004 Concept Lattices and their Applications'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 240 is 'International Conference on Concept Lattices and their Applications'"
+      },
+      {
+            "role": "user",
+            "content": "Event 241 is named 'Latin-American Workshop on Non-Monotonic Reasoning, 1st Intl. LA-NMR04 Workshop, Antiguo Colegio de San Ildefonso'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 241 is 'Latin-American Workshop on Non-Monotonic Reasoning'"
+      },
+      {
+            "role": "user",
+            "content": "Event 242 is named 'Answer Set Programming, Advances in Theory and Implementation, 2nd Intl. ASP'03 Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 242 is 'Answer Set Programming'"
+      },
+      {
+            "role": "user",
+            "content": "Event 243 is named 'Design and Management of Data Warehouses 2003, 5th Intl. Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 243 is 'Design and Management of Data Warehouses'"
+      },
+      {
+            "role": "user",
+            "content": "Event 244 is named 'Design and Management of Data Warehouses 2002, 4th Intl. Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 244 is 'Design and Management of Data Warehouses'"
+      },
+      {
+            "role": "user",
+            "content": "Event 245 is named 'International Workshop on the Semantic Web, Hawaii'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 245 is 'International Workshop on the Semantic Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 246 is named '3rd Intl. Workshop on Design and Management of Data Warehouses, DMDW'2001'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 246 is 'Design and Management of Data Warehouses'"
+      },
+      {
+            "role": "user",
+            "content": "Event 247 is named 'Second International Workshop on the Semantic Web'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 247 is 'International Workshop on the Semantic Web'"
+      },
+      {
+            "role": "user",
+            "content": "Event 248 is named 'International Conference on Systems Thinking in Management'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 248 is 'International Conference on Systems'"
+      },
+      {
+            "role": "user",
+            "content": "Event 249 is named 'Third International Conference on Practical Aspects of Knowledge Management, Third International Conference'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 249 is 'Practical Aspects of Knowledge Management'"
+      },
+      {
+            "role": "user",
+            "content": "Event 250 is named '7th International Workshop on Knowledge Representation meets Databases (KRDB 2000)'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 250 is 'Knowledge Representation Meets Databases'"
+      },
+      {
+            "role": "user",
+            "content": "Event 251 is named '4. Workshop F\u00f6derierte Datenbanken'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 251 is 'Workshop F\u00f6derierte Datenbanken'"
+      },
+      {
+            "role": "user",
+            "content": "Event 252 is named 'Intl. Workshop on Design and Management of Data Warehouses, DMDW'99'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 252 is 'Design and Management of Data Warehouses'"
+      },
+      {
+            "role": "user",
+            "content": "Event 253 is named 'Intelligent Access to Heterogeneous Information, 4th Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 253 is 'Knowledge Representation Meets Databases'"
+      },
+      {
+            "role": "user",
+            "content": "Event 254 is named 'Reasoning about Structured Objects: Knowledge Representation Meets Databases, 2nd Workshop'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 254 is 'Knowledge Representation Meets Databases'"
+      },
+      {
+            "role": "user",
+            "content": "Event 255 is named 'Doctoral Consortium Proceedings of the 30th International Conference on Case-Based Reasoning co-located with the 30th International Conference on Case-Based Reasoning'"
+      },
+      {
+            "role": "assistant",
+            "content": "The event series for Event 255 is 'CEUR Workshop Proceedings'"
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the Workshop on Applied Machine Learning Methods for Time Series Forecasting (AMLTS 2022)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the Workshop on Applied Machine Learning Methods for Time Series Forecasting (AMLTS 2022),\" the event series for this proceeding would be 'Workshop on Applied Machine Learning Methods for Time Series Forecasting'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of 1st Workshop on Bias, Ethical AI, Explainability and the Role of Logic and Logic Programming (BEWARE 2022)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of 1st Workshop on Bias, Ethical AI, Explainability and the Role of Logic and Logic Programming (BEWARE 2022),\" the event series for this proceeding would be 'Workshop on Bias, Ethical AI, Explainability and the Role of Logic and Logic Programming'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Joint Proceedings of the 2th Workshop on Emotions, Modality, Sentiment Analysis and the Semantic Web and the 1st International Workshop on Extraction and Processing of Rich Semantics from Medical Texts"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Joint Proceedings of the 2th Workshop on Emotions, Modality, Sentiment Analysis and the Semantic Web and the 1st International Workshop on Extraction and Processing of Rich Semantics from Medical Texts,\" the event series for this proceeding would be 'Joint Workshop on Emotions, Modality, Sentiment Analysis and the Semantic Web' and 'International Workshop on Extraction and Processing of Rich Semantics from Medical Texts'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the New Trends in HCI and Sports Workshop"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the New Trends in HCI and Sports Workshop,\" the event series for this proceeding would be 'New Trends in HCI and Sports Workshop'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Joint Proceedings of Baltic DB&IS 2022 Doctoral Consortium and Forum"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Joint Proceedings of Baltic DB&IS 2022 Doctoral Consortium and Forum,\" the event series for this proceeding would be 'Baltic DB&IS Doctoral Consortium and Forum'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 6th International Workshop on Artificial Intelligence and Cognition"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 6th International Workshop on Artificial Intelligence and Cognition,\" the event series for this proceeding would be 'International Workshop on Artificial Intelligence and Cognition'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Joint Workshop Proceedings of the 3rd Edition of Knowledge-aware and Conversational Recommender Systems (KaRS) and the 5th Edition of Recommendation in Complex Environments (ComplexRec)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Joint Workshop Proceedings of the 3rd Edition of Knowledge-aware and Conversational Recommender Systems (KaRS) and the 5th Edition of Recommendation in Complex Environments (ComplexRec),\" the event series for this proceeding would be 'Knowledge-aware and Conversational Recommender Systems' and 'Recommendation in Complex Environments'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the International Congress on Educational and Technology in Sciences 2019"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the International Congress on Educational and Technology in Sciences 2019,\" the event series for this proceeding would be 'International Congress on Educational and Technology in Sciences'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the First International Workshop on Linked Data for Information Extraction (LD4IE 2013)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the First International Workshop on Linked Data for Information Extraction (LD4IE 2013),\" the event series for this proceeding would be 'International Workshop on Linked Data for Information Extraction'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 2023 International Workshop on Petri Nets and Software Engineering (PNSE 2023)co-located with the 44th International Conference on Application and Theory of Petri Nets and Concurrency (PETRI NETS 2023)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 2023 International Workshop on Petri Nets and Software Engineering (PNSE 2023) co-located with the 44th International Conference on Application and Theory of Petri Nets and Concurrency (PETRI NETS 2023),\" the event series for this proceeding would be 'International Workshop on Petri Nets and Software Engineering' and 'International Conference on Application and Theory of Petri Nets and Concurrency'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the Sixth Image Schema Day"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the Sixth Image Schema Day,\" the event series for this proceeding would be 'Image Schema Day'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings 9th Intl. Conference on Conceptual Structures (ICCS'01), Stanford, Calif., USA, July 30 to August 3, 2001."
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings 9th Intl. Conference on Conceptual Structures (ICCS'01), Stanford, Calif., USA, July 30 to August 3, 2001,\" the event series for this proceeding would be 'International Conference on Conceptual Structures'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the Medical Information Retrieval Workshop at SIGIR"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the Medical Information Retrieval Workshop at SIGIR,\" the event series for this proceeding would be 'Medical Information Retrieval Workshop at SIGIR'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the The QPP++ 2023: Query Performance Prediction and Its Evaluation in New Tasks Workshop"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the QPP++ 2023: Query Performance Prediction and Its Evaluation in New Tasks Workshop,\" the event series for this proceeding would be 'Query Performance Prediction and Its Evaluation in New Tasks Workshop'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the SICSA Workshop on Reasoning, Learning and Explainability"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the SICSA Workshop on Reasoning, Learning and Explainability,\" the event series for this proceeding would be 'SICSA Workshop on Reasoning, Learning and Explainability'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 1st Workshop on Linked Data Quality"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 1st Workshop on Linked Data Quality,\" the event series for this proceeding would be 'Workshop on Linked Data Quality'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 4th GraphHPC conference on large-scale graph processing using HPC systems"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 4th GraphHPC conference on large-scale graph processing using HPC systems,\" the event series for this proceeding would be 'GraphHPC Conference on Large-Scale Graph Processing Using HPC Systems'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 21st Conference on Scientific Services & Internet (SSI-2019)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 21st Conference on Scientific Services & Internet (SSI-2019),\" the event series for this proceeding would be 'Conference on Scientific Services & Internet'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Joint Proceedings of the 6th International Workshop on the Foundations, Technologies and Applications of the Geospatial Web and 7th International Workshop on Semantic Sensor Networks"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Joint Proceedings of the 6th International Workshop on the Foundations, Technologies and Applications of the Geospatial Web and 7th International Workshop on Semantic Sensor Networks,\" the event series for this proceeding would be 'International Workshop on the Foundations, Technologies and Applications of the Geospatial Web' and 'International Workshop on Semantic Sensor Networks'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the Joint Ontology Workshops"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the Joint Ontology Workshops,\" the event series for this proceeding would be 'Joint Ontology Workshops'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the First International Workshop on Knowledge Discovery and Data Mining Meets Linked Open Data"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the First International Workshop on Knowledge Discovery and Data Mining Meets Linked Open Data,\" the event series for this proceeding would be 'International Workshop on Knowledge Discovery and Data Mining Meets Linked Open Data'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 3rd Workshop on Affective Computing and Context Awareness in Ambient Intelligence (AfCAI 2019)"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 3rd Workshop on Affective Computing and Context Awareness in Ambient Intelligence (AfCAI 2019),\" the event series for this proceeding would be 'Workshop on Affective Computing and Context Awareness in Ambient Intelligence'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the 5th International Conference on Actual Problems of System and Software Engineering"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the 5th International Conference on Actual Problems of System and Software Engineering,\" the event series for this proceeding would be 'International Conference on Actual Problems of System and Software Engineering'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the Same Side Stance Classification Shared Task"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the Same Side Stance Classification Shared Task,\" the event series for this proceeding would be 'Same Side Stance Classification Shared Task'."
+      },
+      {
+            "role": "user",
+            "content": "The title of 'proceeding' for you to find event series is Proceedings of the Demonstrations Track of PRIMA 2017"
+      },
+      {
+            "role": "assistant",
+            "content": "Based on the title \"Proceedings of the Demonstrations Track of PRIMA 2017,\" the event series for this proceeding would be 'PRIMA Demonstrations Track'."
+      }
+]
