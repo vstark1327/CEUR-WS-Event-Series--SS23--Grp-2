@@ -1,0 +1,25 @@
+Workshop on Applied Machine Learning Methods for Time Series Forecasting
+Workshop on Bias, Ethical AI, Explainability and the Role of Logic and Logic Programming
+Joint Workshop on Emotions, Modality, Sentiment Analysis and the Semantic Web ; International Workshop on Extraction and Processing of Rich Semantics from Medical Texts
+New Trends in HCI and Sports Workshop
+Baltic DB&IS Doctoral Consortium and Forum
+International Workshop on Artificial Intelligence and Cognition
+Knowledge-aware and Conversational Recommender Systems ; Recommendation in Complex Environments
+International Congress on Educational and Technology in Sciences
+International Workshop on Linked Data for Information Extraction
+International Workshop on Petri Nets and Software Engineering ; International Conference on Application and Theory of Petri Nets and Concurrency
+Image Schema Day
+International Conference on Conceptual Structures
+Medical Information Retrieval Workshop at SIGIR
+Query Performance Prediction and Its Evaluation in New Tasks Workshop
+SICSA Workshop on Reasoning, Learning and Explainability
+Workshop on Linked Data Quality
+GraphHPC Conference on Large-Scale Graph Processing Using HPC Systems
+Conference on Scientific Services & Internet
+International Workshop on the Foundations, Technologies and Applications of the Geospatial Web ; International Workshop on Semantic Sensor Networks
+Joint Ontology Workshops
+International Workshop on Knowledge Discovery and Data Mining Meets Linked Open Data
+Workshop on Affective Computing and Context Awareness in Ambient Intelligence
+International Conference on Actual Problems of System and Software Engineering
+Same Side Stance Classification Shared Task
+PRIMA Demonstrations Track
